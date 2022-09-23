@@ -16,13 +16,9 @@ pipeline {
         
      stage ('Docker Build') {
            steps {
-               script {
-         // Build and push image with Jenkins' docker-plugin
-            withDockerRegistry([credentialsId: "dockerhub", url: "https://index.docker.io/v1/"]) {
-            image = docker.build("omontalvoaws/simple-devops")
-            image.push()    
-            }
-               }
+               bat(script: 'docker login --username %UsernameDockerHub% --password %PasswordDockerHub%' , returnStdout:true);
+             bat(script: 'docker build -t omontalvoaws/simple-devops .' , returnStdout:true);
+             bat(script: 'docker push omontalvoaws/simple-devops' , returnStdout:true);
            }
         }
         
