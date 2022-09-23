@@ -8,22 +8,25 @@ pipeline {
      
      stage('SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/omontalvo1986/FirstDevOpsJob'
+                git branch: 'main', url: 'https://github.com/Stywar/FirstDevOpsJob'
                 
             }
         }
-            
+
+        
      stage ('Docker Build') {
            steps {
                script {
          // Build and push image with Jenkins' docker-plugin
-            //withDockerRegistry([credentialsId: "dockerhub", url: "https://index.docker.io/v1/"]) {
-            image = docker.build("omontalvoaws/simple-devops")
+            withDockerRegistry([credentialsId: "dockerhub", url: "https://index.docker.io/v1/"]) {
+            image = docker.build("antony0618/simple-devops")
             image.push()    
             }
                }
            }
         }
+        
+
     
       
      }
