@@ -12,7 +12,8 @@ pipeline {
                 
             }
         }
-    stage ('Docker Build') {
+            
+     stage ('Docker Build') {
            steps {
                script {
          // Build and push image with Jenkins' docker-plugin
@@ -23,8 +24,6 @@ pipeline {
                }
            }
         }
-        
-     
     
       
      }
