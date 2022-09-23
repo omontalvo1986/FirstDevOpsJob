@@ -1,41 +1,41 @@
 pipeline {
     agent any
      environment {
-         AWS_ACCESS_KEY_ID     = credentials('jenkis_aws_key_id')
+        AWS_ACCESS_KEY_ID     = credentials('jenkis_aws_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkis_aws_key_secret')
     } 
  stages {
      
      stage('SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/omontalvo1986/FirstDevOpsJob.git'
+                git branch: 'main', url: 'https://github.com/omontalvo1986/FirstDevOpsJob'
                 
             }
         }
     stage ('Build') {
          steps {
-             sh(script: 'mvn -f pom.xml clean install', returnStdout: true);
+             bat(script: 'mvn -f pom.xml clean install', returnStdout: true);
          }
         }
         
-        stage ('Docker Build') {
-          steps{
-             sh(script: 'docker login --username %UsernameDockerHub% --password %PasswordDockerHub%' , returnStdout:true);
-             sh(script: 'docker build -t omontalvoaws/firstdevopsjob .' , returnStdout:true);
-             sh(script: 'docker push omontalvoaws/firstdevopsjob' , returnStdout:true);  
+     stage ('Docker Build') {
+           steps {
+                    bat(script: 'docker login --username %UsernameDockerHub% --password %PasswordDockerHub%' , returnStdout:true);
+                    bat(script: 'docker build -t omontalvoaws/servicejavav1 .' , returnStdout:true);
+                    bat(script: 'docker push omontalvoaws/servicejavav1' , returnStdout:true);  
+               }
            }
-
         }
         
-         stage ('K8S Deploy') {
-            steps {
-              sh(script:  'aws configure set region us-east-1',returnStdout: true);
-              sh(script: 'kubectl config use-context arn:aws:eks:us-east-1:901611473617:cluster/SLabJenkins-cluster/eks-cluster  --kubeconfig=$KUBE_PATH_CONFIG', returnStdout: true);
-              sh(script: 'Kubectl delete --all pods --kubeconfig=$KUBE_PATH_CONFIG & kubectl apply -f Devops.yaml --kubeconfig=$KUBE_PATH_CONFIG', returnStdout: true);
-            }
+         //stage ('K8S Deploy') {
+            //steps {
+              //bat (script:  'aws configure set region us-east-1',returnStdout: true);
+              //bat(script: 'kubectl config use-context K8S-developer@demo-eks.us-east-1.eksctl.io  --kubeconfig=%KUBE_PATH_CONFIG%', returnStdout: true);
+              //bat(script: 'Kubectl delete --all pods --kubeconfig=%KUBE_PATH_CONFIG% & kubectl apply -f Devops.yaml --kubeconfig=%KUBE_PATH_CONFIG%', returnStdout: true);
+            //}
                
             
-        }
+        //}
     
       
      }
