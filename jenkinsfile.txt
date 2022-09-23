@@ -25,7 +25,7 @@ pipeline {
                     bat(script: 'docker push omontalvoaws/servicejavav1' , returnStdout:true);  
                }
            }
-        }
+        
         
          //stage ('K8S Deploy') {
             //steps {
