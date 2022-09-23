@@ -8,35 +8,10 @@ pipeline {
      
      stage('SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/omontalvo1986/FirstDevOpsJob'
+                git branch: 'main', url: 'https://github.com/Stywar/FirstDevOpsJob'
                 
             }
-        }
-    stage ('Build') {
-         steps {
-             bat(script: 'mvn -f pom.xml clean install', returnStdout: true);
-         }
-        }
-        
-     stage ('Docker Build') {
-           steps {
-                    bat(script: 'docker login --username %UsernameDockerHub% --password %PasswordDockerHub%' , returnStdout:true);
-                    bat(script: 'docker build -t omontalvoaws/servicejavav1 .' , returnStdout:true);
-                    bat(script: 'docker push omontalvoaws/servicejavav1' , returnStdout:true);  
-               }
-           }
-        
-        
-         //stage ('K8S Deploy') {
-            //steps {
-              //bat (script:  'aws configure set region us-east-1',returnStdout: true);
-              //bat(script: 'kubectl config use-context K8S-developer@demo-eks.us-east-1.eksctl.io  --kubeconfig=%KUBE_PATH_CONFIG%', returnStdout: true);
-              //bat(script: 'Kubectl delete --all pods --kubeconfig=%KUBE_PATH_CONFIG% & kubectl apply -f Devops.yaml --kubeconfig=%KUBE_PATH_CONFIG%', returnStdout: true);
-            //}
-               
-            
-        //}
-    
+        }    
       
      }
 }
