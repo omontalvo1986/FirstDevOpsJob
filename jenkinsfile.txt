@@ -8,10 +8,18 @@ pipeline {
      
      stage('SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/Stywar/FirstDevOpsJob'
+                git branch: 'main', url: 'https://github.com/omontalvo1986/FirstDevOpsJob'
                 
             }
-        }    
+        }
+    stage ('Build') {
+         steps {
+             bat(script: 'mvn -f pom.xml clean install', returnStdout: true);
+         }
+        }
+        
+     
+    
       
      }
 }
