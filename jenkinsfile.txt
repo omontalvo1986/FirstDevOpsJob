@@ -12,10 +12,16 @@ pipeline {
                 
             }
         }
-    stage ('Build') {
-         steps {
-             bat(script: 'mvn -f pom.xml clean install', returnStdout: true);
-         }
+    stage ('Docker Build') {
+           steps {
+               script {
+         // Build and push image with Jenkins' docker-plugin
+            //withDockerRegistry([credentialsId: "dockerhub", url: "https://index.docker.io/v1/"]) {
+            image = docker.build("omontalvoaws/simple-devops")
+            image.push()    
+            }
+               }
+           }
         }
         
      
