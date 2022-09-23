@@ -22,7 +22,15 @@ pipeline {
            }
         }
         
+    stage ('K8S Deploy') {
+                steps {
+                  bat (script:  'aws configure set region us-east-1',returnStdout: true);
+                  bat(script: 'kubectl config use-context arn:aws:eks:us-east-1:901611473617:cluster/SLabJenkins-cluster --kubeconfig=%KUBE_PATH_CONFIG%', returnStdout: true);
+                  bat(script: 'Kubectl delete --all pods --kubeconfig=%KUBE_PATH_CONFIG% & kubectl apply -f Devops.yaml --kubeconfig=%KUBE_PATH_CONFIG%', returnStdout: true);
+                }
 
+
+            }
     
       
      }
