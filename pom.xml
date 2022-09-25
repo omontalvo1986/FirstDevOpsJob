@@ -44,7 +44,7 @@
 		</plugins>
 	</build>
 	
-	
+<!--Oswaldo Montalvo: Se activa tipo de empaquetado para despliegue en tomcat-->
 <packaging>${packaging.type}</packaging>	
 <profiles>
    <!--<profile>
