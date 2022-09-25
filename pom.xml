@@ -45,15 +45,15 @@
 	</build>
 	
 	
-<!--<packaging>${packaging.type}</packaging>	
+<packaging>${packaging.type}</packaging>	
 <profiles>
-   <profile>
+   <!--<profile>
        <id>jar</id>
        <properties>
            <packaging.type>jar</packaging.type>
            <spring.profiles.active>dev</spring.profiles.active>
        </properties>
-   </profile>
+   </profile>-->
    <profile>
        <id>war</id>
        <properties>
@@ -68,6 +68,6 @@
             </dependency>
        </dependencies>
    </profile>
-</profiles> -->
+</profiles>
 
 </project>
