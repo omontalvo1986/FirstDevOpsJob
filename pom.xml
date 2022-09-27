@@ -47,14 +47,14 @@
 <!--Oswaldo Montalvo: Se activa tipo de empaquetado para despliegue en tomcat-->
 <packaging>${packaging.type}</packaging>	
 <profiles>
-   <!--<profile>
+   <profile>
        <id>jar</id>
        <properties>
            <packaging.type>jar</packaging.type>
            <spring.profiles.active>dev</spring.profiles.active>
        </properties>
-   </profile>-->
-   <profile>
+   </profile>
+   <!--<profile>
        <id>war</id>
        <properties>
             <packaging.type>war</packaging.type>
@@ -67,7 +67,7 @@
                 <scope>provided</scope>
             </dependency>
        </dependencies>
-   </profile>
+   </profile>-->
 </profiles>
 
 </project>
